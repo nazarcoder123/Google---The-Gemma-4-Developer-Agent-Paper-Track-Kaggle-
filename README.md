@@ -58,8 +58,3 @@ Package the `adk_agent/` directory into a competition-ready zip archive:
 python package_submission.py
 ```
 This produces `submission.zip` containing `agent.yaml` at its root.
-
-### 3. Submitting to the Paper Track
-- Open `paper/KAGGLE_WRITEUP.md`
-- Copy the content into the Kaggle Writeup editor at [gemma-4-developer-agent-paper](https://www.kaggle.com/competitions/gemma-4-developer-agent-paper).
-- Attach the link to your public notebook or repository.
