@@ -51,10 +51,3 @@ Verify the end-to-end graph navigation and AST verification pipeline:
 ```bash
 python run_demo.py
 ```
-
-### 2. Generate the Kaggle ADK `submission.zip`
-Package the `adk_agent/` directory into a competition-ready zip archive:
-```bash
-python package_submission.py
-```
-This produces `submission.zip` containing `agent.yaml` at its root.
