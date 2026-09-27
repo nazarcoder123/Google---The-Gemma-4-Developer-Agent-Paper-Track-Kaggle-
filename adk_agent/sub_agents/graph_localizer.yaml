@@ -1,0 +1,12 @@
+name: graph_localizer
+type: specialized_agent
+description: "Identifies fault-inducing functions and modules using AST call graph traversal and semantic embeddings."
+model: gemma-4-coder
+sampling_config: !include ../configs/sampling.yaml
+prompt: !include ../prompts/localizer.md
+tools:
+  - search_similar_code
+  - get_code_neighbors
+  - get_code_subgraph
+  - view_code_node
+max_steps: 6

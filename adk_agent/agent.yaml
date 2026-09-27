@@ -1,0 +1,42 @@
+# Root Google ADK Agent Specification for Gemma 4 Developer Agent
+adk_version: "2.0"
+agent_name: "GraphSWE-Gemma"
+description: "Hierarchical Code-Graph Reasoning & Test-Driven Self-Correction Agent for Autonomous Software Engineering."
+version: "1.0.0"
+
+model:
+  name: "google/gemma-4-9b-it"
+  provider: "kaggle-accelerator"
+  quantization: "bfloat16"
+
+sampling: !include configs/sampling.yaml
+
+system_instruction: !include prompts/system.md
+
+sub_agents:
+  localizer: !include sub_agents/graph_localizer.yaml
+  verifier: !include sub_agents/patch_verifier.yaml
+
+skills:
+  - name: repo_graph_navigation
+    path: skills/repo_graph_navigation
+
+tools:
+  - name: search_similar_code
+    description: "Search symbols by semantic cosine similarity over 256-dim AST embeddings."
+  - name: get_code_neighbors
+    description: "Retrieve incoming callers and outgoing references for a qualified symbol."
+  - name: get_code_subgraph
+    description: "Extract a k-hop induced subgraph centered around target symbols."
+  - name: view_code_node
+    description: "Fetch source code snippet for a qualified symbol node."
+  - name: execute_sandbox_command
+    description: "Execute bash commands, pytest, or git operations in the sandboxed container."
+  - name: apply_git_patch
+    description: "Apply a candidate unified diff patch to the repository tree."
+
+runtime:
+  max_iterations: 12
+  timeout_seconds_per_task: 300
+  enable_context_compaction: true
+  token_budget: 8192

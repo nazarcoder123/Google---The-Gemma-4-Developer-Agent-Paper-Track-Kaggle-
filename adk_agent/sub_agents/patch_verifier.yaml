@@ -1,0 +1,17 @@
+name: patch_verifier
+type: specialized_agent
+description: "Verifies unified diff patch syntax and executes reproduction pytest assertions inside the isolated sandbox."
+model: gemma-4-coder
+sampling_config: !include ../configs/sampling.yaml
+prompt: |
+  Validate the candidate unified diff patch.
+  1. Inspect the diff for AST syntax errors.
+  2. Apply the patch to the working tree.
+  3. Execute pytest reproduction tests.
+  4. If tests fail, report the exact stack trace and failing assertion back to the primary agent for self-correction.
+tools:
+  - validate_diff_syntax
+  - apply_git_patch
+  - run_pytest_command
+  - revert_git_patch
+max_steps: 4

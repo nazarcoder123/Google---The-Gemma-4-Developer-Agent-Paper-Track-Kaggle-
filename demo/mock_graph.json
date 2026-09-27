@@ -1,0 +1,54 @@
+{
+  "directed": true,
+  "multigraph": true,
+  "graph": {
+    "repo": "fastapi/fastapi",
+    "base_commit": "a1b2c3d4e5f67890"
+  },
+  "nodes": [
+    {
+      "id": "fastapi.routing._prepare_response_content",
+      "name": "_prepare_response_content",
+      "type": "function",
+      "text": "def _prepare_response_content(res_content: Any, exclude_unset: bool = False) -> Any:\n    if res_content is None:\n        return None\n    # Existing serialization logic\n    return res_content"
+    },
+    {
+      "id": "fastapi.routing.serialize_response",
+      "name": "serialize_response",
+      "type": "function",
+      "text": "def serialize_response(field: ModelField, response_content: Any) -> Any:\n    return _prepare_response_content(response_content)"
+    },
+    {
+      "id": "fastapi.encoders.jsonable_encoder",
+      "name": "jsonable_encoder",
+      "type": "function",
+      "text": "def jsonable_encoder(obj: Any, include: Optional[Set] = None) -> Any:\n    if isinstance(obj, dict):\n        return obj\n    return str(obj)"
+    },
+    {
+      "id": "rich.console.Console.render_str",
+      "name": "render_str",
+      "type": "method",
+      "text": "def render_str(self, text: str, highlight: bool = True) -> Text:\n    if not text:\n        pass\n    return Text(text)"
+    },
+    {
+      "id": "requests.models.PreparedRequest.prepare_url",
+      "name": "prepare_url",
+      "type": "method",
+      "text": "def prepare_url(self, url: str, params: Dict[str, Any]) -> None:\n    if not url:\n        pass\n    self.url = url"
+    }
+  ],
+  "edges": [
+    {
+      "source": "fastapi.routing.serialize_response",
+      "target": "fastapi.routing._prepare_response_content",
+      "type": "calls",
+      "key": 0
+    },
+    {
+      "source": "fastapi.routing._prepare_response_content",
+      "target": "fastapi.encoders.jsonable_encoder",
+      "type": "calls",
+      "key": 0
+    }
+  ]
+}
